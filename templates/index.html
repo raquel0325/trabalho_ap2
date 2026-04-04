@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro Geral</title>
+    <link rel="stylesheet" href="../static/css/index.css">
+</head>
+<body>
+
+    <div class="conteinerInf">
+        <h1>Bem-vindo!</h1>
+    </div>
+
+    <div class="containerAcesso">
+        
+        <div id="escolhaInicial" class="btn-main-group">
+            <button class="btn-main" onclick="selecionarFluxo('login')">Fazer Login</button>
+            <button class="btn-main" onclick="selecionarFluxo('cadastro')">Criar Conta</button>
+        </div>
+
+        <div id="secaoLogin" class="containerLogin">
+            <h2>Faça seu login:</h2>
+            <form action="/login" method="POST">
+                <input type="email" name="email" placeholder="E-mail" required><br>
+                <input type="password" name="senha" placeholder="Senha" required><br>
+                <button type="submit">Entrar</button>
+            </form>
+        </div>
+
+        <div id="secaoCadastro" class="conteinerCadastro hidden">
+            <h2>Selecione o tipo de cadastro:</h2>
+            
+            <div class="btn-group">
+                <button class="toggle-btn" onclick="mostrarFormCadastro('formFuncionario')">Funcionário</button>
+                <button class="toggle-btn" onclick="mostrarFormCadastro('formEmpresa')">Empresa</button>
+            </div>
+
+            <hr>
+
+            <div id="formFuncionario" class="form-container active"> 
+                <h3>Cadastro de Funcionário</h3>
+                <form action="/cadastro/funcionario" method="POST">
+                    <input type="text" name="nome" placeholder="Nome" required><br>
+                    <input type="email" name="email" placeholder="E-mail" required><br>
+                    <input type="password" name="senha" placeholder="Senha" required><br>
+                    <input type="text" name="cpf" placeholder="CPF" required><br>
+                    <button type="submit">Salvar Funcionário</button>
+                </form>
+            </div>
+
+            <div id="formEmpresa" class="form-container">
+                <h3>Cadastro de Empresa</h3>
+                <form action="/cadastro/empresa" method="POST">
+                    <input type="text" name="nome" placeholder="Nome da Empresa" required><br>
+                    <input type="text" name="cnpj" placeholder="CNPJ" required><br>
+                    <input type="text" name="endereco" placeholder="Endereço"><br>
+                    <input type="email" name="email" placeholder="E-mail Corporativo"><br>
+                    <button type="submit">Salvar Empresa</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function selecionarFluxo(tipo) {
+           
+            if (tipo === 'login') {
+                document.getElementById('secaoLogin').classList.remove('hidden');
+                document.getElementById('secaoCadastro').classList.add('hidden');
+            } else {
+                document.getElementById('secaoLogin').classList.add('hidden');
+                document.getElementById('secaoCadastro').classList.remove('hidden');
+            }
+        }
+
+        function mostrarFormCadastro(idForm) {
+           
+            document.querySelectorAll('.form-container').forEach(div => {
+                div.classList.remove('active');
+            });
+          
+            document.getElementById(idForm).classList.add('active');
+        }
+    </script>
+</body>
+</html>
