@@ -38,3 +38,16 @@
 
     input { width: 90%; padding: 10px; margin: 5px 0; border-radius: 4px; border: 1px solid #ccc; }
     button[type="submit"] { cursor: pointer; padding: 10px 20px; background-color: rgb(7, 7, 237); color: white; border: none; border-radius: 4px; }
+
+
+    .hidden {
+    display: none !important;
+}
+
+.form-container {
+    display: none;
+}
+
+.form-container.active {
+    display: block;
+}

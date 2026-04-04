@@ -3,55 +3,64 @@ import os
 
 conexao = sqlite3.connect('banco.db')
 
-
 cursor = conexao.cursor()
 
-cursor.execute("""CREATE TABLE IF NOT EXISTS contas_bancarias (
-               id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-               titular TEXT NOT NULL,
-               saldo FLOAT NOT NULL,
-               cpf TEXT NOT NULL UNIQUE
-               )""")
+cursor.execute("PRAGMA foreign_keys = ON;")
 
-#cursor.execute("""INSERT INTO contas_bancarias
-#               (titular, saldo,cpf) VALUES
-#               ('Pedro', 500, '123.456.789-10')""")
+criar_tabela_funcionarios = '''CREATE TABLE IF NOT EXISTS
+funcionarios 
+(
+    id_funcionario INTEGER PRIMARY KEY AUTOINCREMENT, 
+    nome TEXT,
+    email TEXT,
+    senha TEXT,
+    telefone INTEGER,
+    cpf TEXT NOT NULL UNIQUE    
+)'''
 
-
-#cursor.execute(""" SELECT * FROM contas_bancarias""")
-#contas = cursor.fetchall()
-#print(contas)
-#for conta in contas:
-#    id, titular, saldo, cpf = conta
-#    print(f"""
-#        id: {id} 
-#        titular: {titular}
-#        saldo: {saldo}
-#        cpf: {cpf}""")
-#    print("\n")
-
-cursor.execute("""SELECT titular, saldo FROM contas_bancarias""")
-contas = cursor.fetchall()
-for conta in contas:
-    titular, saldo = conta
-    print(f"""
-        titular: {titular}
-        saldo: {saldo}
-    """)
+cursor.execute(criar_tabela_funcionarios)
 
 
-cursor.execute("""SELECT titular, saldo FROM contas_bancarias WHERE id = 1 """)
-contas = cursor.fetchall()
-for conta in contas:
-    titular, saldo = conta
-    print(f"""
-        titular: {titular}
-        saldo: {saldo}
-    """)
-cursor.execute("""UPDATE contas_bancarias SET saldo = 199 WHERE id = 1""")
 
-cursor.execute("DELETE FROM contas_bancarias WHERE id = 1")
+#==================================================================================================================
+create_empresas = '''CREATE TABLE IF NOT EXISTS
+empresas
+(
+    id_empresa INTEGER PRIMARY KEY AUTOINCREMENT, 
+    nome TEXT,
+    endereco TEXT,
+    email TEXT,
+    senha TEXT,
+    telefone INTEGER,
+    cnpj TEXT NOT NULL UNIQUE
+)'''
+cursor.execute(create_empresas)
 
 
-conexao.commit()
 
+#==================================================================================================================
+create_competencias = ''' CREATE TABLE IF NOT EXISTS
+competencias
+(
+    id_competencia INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT
+)'''
+cursor.execute(create_competencias)
+
+#==================================================================================================================
+
+
+create_vagas = ''' CREATE TABLE IF NOT EXISTS
+vagas
+(
+    id_vaga INTEGER PRIMARY KEY AUTOINCREMENT,
+    titulo TEXT,
+    descricao TEXT,
+    salario REAL,
+    id_empresa INTEGER,
+    id_competencia INTEGER,
+    FOREIGN KEY (id_competencia) REFERENCES competencias (id_competencia),
+    FOREIGN KEY (id_empresa) REFERENCES empresas (id_empresa)
+)'''
+
+cursor.execute(create_vagas)
