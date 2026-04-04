@@ -1,6 +1,7 @@
 import sqlite3
 import os
 
+
 conexao = sqlite3.connect('banco.db')
 
 cursor = conexao.cursor()
@@ -47,6 +48,8 @@ competencias
 )'''
 cursor.execute(create_competencias)
 
+
+
 #==================================================================================================================
 
 
@@ -64,3 +67,23 @@ vagas
 )'''
 
 cursor.execute(create_vagas)
+
+
+
+
+
+create_func_comp = ''' CREATE TABLE IF NOT EXISTS funcionario_competencias (
+    id_funcionario INTEGER,
+    id_competencia INTEGER,
+    FOREIGN KEY (id_funcionario) REFERENCES funcionarios (id_funcionario),
+    FOREIGN KEY (id_competencia) REFERENCES competencias (id_competencia)
+)'''
+
+
+
+cursor.execute(create_func_comp)
+
+
+
+conexao.commit() # ISSO É O MAIS IMPORTANTE! Sem isso, o banco fica vazio.
+conexao.close()

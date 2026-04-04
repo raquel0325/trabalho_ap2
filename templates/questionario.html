@@ -1,0 +1,49 @@
+<form action="/salvar_questionario" method="POST">
+    <input type="hidden" name="id_func" value="{{ id_func }}">
+
+    <h3>Quais são suas habilidades?</h3>
+    
+    <div id="lista-competencias">
+        {% for c in competencias %}
+        <label>
+            <input type="checkbox" name="competencias" value="{{ c[0] }}"> {{ c[1] }}
+        </label><br>
+        {% endfor %}
+    </div>
+
+    <hr>
+    
+    <h3>Não encontrou? Adicione uma nova:</h3>
+    <input type="text" id="input_nova_comp" placeholder="Ex: Photoshop">
+    <button type="button" onclick="adicionarNaLista()">Adicionar à lista</button>
+    
+    <br><br>
+    <button type="submit" style="background-color: green; color: white;">Finalizar Perfil</button>
+</form>
+
+<script>
+function adicionarNaLista() {
+    const input = document.getElementById('input_nova_comp');
+    const nomeComp = input.value.trim();
+    const lista = document.getElementById('lista-competencias');
+
+    if (nomeComp !== "") {
+        // Criamos o HTML do novo checkbox dinamicamente
+        const novoItem = `
+            <label>
+                <input type="checkbox" name="novas_competencias" value="${nomeComp}" checked> 
+                ${nomeComp} (Nova)
+            </label><br>
+        `;
+        
+        // Adiciona ao final da lista
+        lista.insertAdjacentHTML('beforeend', novoItem);
+        
+        // Limpa o campo de texto
+        input.value = "";
+        input.focus();
+    } else {
+        alert("Digite um nome para a competência!");
+    }
+}
+</script>

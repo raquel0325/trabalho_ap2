@@ -18,7 +18,6 @@ venv.bak/
 *~
 
 # Database
-*.db
 *.sqlite
 *.sqlite3
 
