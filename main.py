@@ -15,7 +15,7 @@ funcionarios
     nome TEXT,
     email TEXT,
     senha TEXT,
-    telefone INTEGER,
+    telefone TEXT,
     cpf TEXT NOT NULL UNIQUE    
 )'''
 
@@ -32,7 +32,7 @@ empresas
     endereco TEXT,
     email TEXT,
     senha TEXT,
-    telefone INTEGER,
+    telefone TEXT,
     cnpj TEXT NOT NULL UNIQUE
 )'''
 cursor.execute(create_empresas)
@@ -84,6 +84,31 @@ create_func_comp = ''' CREATE TABLE IF NOT EXISTS funcionario_competencias (
 cursor.execute(create_func_comp)
 
 
+# ========== NOVAS TABELAS DO QUESTIONÁRIO ==========
 
-conexao.commit() # ISSO É O MAIS IMPORTANTE! Sem isso, o banco fica vazio.
+
+create_questionario = '''CREATE TABLE IF NOT EXISTS respostas_questionario (
+    id_resposta INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_funcionario INTEGER,
+    cidade TEXT,
+    estado TEXT,
+    formacao TEXT, 
+    curso TEXT,
+    instituicao TEXT,
+    ano_conclusao INTEGER,
+
+    ultimo_cargo TEXT,
+    ultima_empresa TEXT,
+    tempo_experiencia TEXT, 
+    
+    data_preenchimento TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    FOREIGN KEY (id_funcionario) REFERENCES funcionarios (id_funcionario)
+)'''
+
+
+cursor.execute(create_questionario)
+ 
+
+conexao.commit() 
 conexao.close()

@@ -7,6 +7,26 @@
 </head>
 <body>
 
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div id="container-alertas">
+      {% for category, message in messages %}
+        <div class="alerta {{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+<script>
+    // Seleciona todos os alertas e remove após 4 segundos
+    setTimeout(() => {
+        const alertas = document.querySelectorAll('.alerta');
+        alertas.forEach(a => a.style.display = 'none');
+    }, 4000);
+</script>
+
+
+
     <div class="conteinerInf">
         <h1>Bem-vindo!</h1>
     </div>
@@ -20,7 +40,7 @@
 
         <div id="secaoLogin" class="containerLogin">
             <h2>Faça seu login:</h2>
-            <form action="/login" method="POST">
+            <form action="/home" method="POST">
                 <input type="email" name="email" placeholder="E-mail" required><br>
                 <input type="password" name="senha" placeholder="Senha" required><br>
                 <button type="submit">Entrar</button>
@@ -39,7 +59,7 @@
 
             <div id="formFuncionario" class="form-container active"> 
                 <h3>Cadastro de Funcionário</h3>
-                <form action="/cadastro/funcionario" method="POST">
+                <form action="/cadastro" method="POST">
                     <input type="text" name="nome" placeholder="Nome" required><br>
                     <input type="email" name="email" placeholder="E-mail" required><br>
                     <input type="password" name="senha" placeholder="Senha" required><br>
@@ -52,7 +72,7 @@
 
             <div id="formEmpresa" class="form-container">
                 <h3>Cadastro de Empresa</h3>
-                <form action="/cadastro/empresa" method="POST">
+                <form action="/cadastros"  method="POST">
                     <input type="text" name="nome" placeholder="Nome da Empresa" required><br>
                     <input type="text" name="cnpj" placeholder="CNPJ" required><br>
                     <input type="text" name="endereco" placeholder="Endereço"><br>

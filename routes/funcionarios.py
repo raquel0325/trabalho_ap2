@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, flash, render_template, request, redirect, url_for
 from database import conectar_banco
 import sqlite3 
 
@@ -7,7 +7,7 @@ import sqlite3
 bp_funcionarios = Blueprint('funcionarios', __name__)
 
 
-@bp_funcionarios.route('/cadastro/funcionario', methods=['POST'])
+@bp_funcionarios.route('/cadastro', methods=['POST'])
 def cadastro_funcionario():
     nome = request.form.get('nome')
     email = request.form.get('email')
@@ -28,20 +28,12 @@ def cadastro_funcionario():
         conn.commit()
         conn.close()
 
-        #  nome_do_blueprint.nome_da_funcao
-        return redirect(url_for('funcionarios.questionario_pag', id_func=id_new_employer))
+
+        return redirect(url_for('questionario.questionario_pag', id_func=id_new_employer))
         
     except sqlite3.IntegrityError:
         conn.close()
-        return "Erro: CPF ou E-mail já cadastrado!", 400
-
-@bp_funcionarios.route('/questionario/funcionario/<int:id_func>')
-def questionario_pag(id_func):
-    conn = conectar_banco()
-    cursor = conn.cursor()
+        flash("E-mail ou CNPJ já cadastrado!", "erro")
+        return redirect('/')
     
-    cursor.execute("SELECT * FROM competencias")
-    comps = cursor.fetchall()
-    conn.close()
 
-    return render_template('questionario.html', id_func=id_func, competencias=comps)
