@@ -4,100 +4,99 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Complete seu Perfil</title>
-    <!--<link rel="stylesheet" href="../static/css/questionario.css">
-     <script src="../static/script/questionario.js" defer></script> -->
+    <link rel="stylesheet" href="../static/css/questionario.css">
+    <!--<script src="../static/script/questionario.js" defer></script> -->
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>📋 Complete seu Perfil</h1>
-            <p>Suas respostas nos ajudam a encontrar as melhores oportunidades para você</p>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
+            
         </div>
         
         <form action="/salvar_questionario" method="POST" id="questionarioForm">
             <input type="hidden" name="id_func" value="{{ id_func }}">
             
             <!-- Seção 1: Localidade -->
-            <div class="secao active" data-secao="0">
-                <h2>📍 Localidade</h2>
-                <div class="secao-subtitle">Onde você está localizado?</div>
-                
-                <div class="campo-row">
-                    <div class="campo">
-                        <label>Cidade <span class="obrigatorio">*</span></label>
-                        <input type="text" name="cidade" required placeholder="Ex: São Paulo">
+             <div class="container1">
+                <div class="secao-active" data-secao="0">
+                    <h2>📍 Localidade</h2>
+                    <div class="secao-subtitle">Onde você está localizado?</div>
+                    
+                    <div class="campo-row">
+                        <div class="campo">
+                            <label>Cidade <span class="obrigatorio">*</span></label>
+                            <input type="text" name="cidade" required placeholder="Ex: São Paulo">
+                        </div>
+                        <div class="campo">
+                            <label>Estado <span class="obrigatorio">*</span></label>
+                            <select name="estado" required>
+                                <option value="">Selecione...</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                            </select>
+                        </div>
                     </div>
+                </div>
+                
+                <!-- Seção 2: Formação Acadêmica -->
+                <div class="secao-formacao" data-secao="1">
+                    <h2>🎓 Formação Acadêmica</h2>
+                    <div class="secao-subtitle">Conte-nos sobre sua educação</div>
+                    
                     <div class="campo">
-                        <label>Estado <span class="obrigatorio">*</span></label>
-                        <select name="estado" required>
+                        <label>Nível de Formação <span class="obrigatorio">*</span></label>
+                        <select name="formacao" required>
                             <option value="">Selecione...</option>
-                            <option value="AC">Acre</option>
-                            <option value="AL">Alagoas</option>
-                            <option value="AP">Amapá</option>
-                            <option value="AM">Amazonas</option>
-                            <option value="BA">Bahia</option>
-                            <option value="CE">Ceará</option>
-                            <option value="DF">Distrito Federal</option>
-                            <option value="ES">Espírito Santo</option>
-                            <option value="GO">Goiás</option>
-                            <option value="MA">Maranhão</option>
-                            <option value="MT">Mato Grosso</option>
-                            <option value="MS">Mato Grosso do Sul</option>
-                            <option value="MG">Minas Gerais</option>
-                            <option value="PA">Pará</option>
-                            <option value="PB">Paraíba</option>
-                            <option value="PR">Paraná</option>
-                            <option value="PE">Pernambuco</option>
-                            <option value="PI">Piauí</option>
-                            <option value="RJ">Rio de Janeiro</option>
-                            <option value="RN">Rio Grande do Norte</option>
-                            <option value="RS">Rio Grande do Sul</option>
-                            <option value="RO">Rondônia</option>
-                            <option value="RR">Roraima</option>
-                            <option value="SC">Santa Catarina</option>
-                            <option value="SP">São Paulo</option>
-                            <option value="SE">Sergipe</option>
-                            <option value="TO">Tocantins</option>
+                            <option value="Ensino Médio">Ensino Médio Completo</option>
+                            <option value="Ensino Médio">Ensino Médio Profissionalizante completo</option>
+                            <option value="Graduação">Graduação (Cursando)</option>
+                            <option value="Graduação Completa">Graduação Completa</option>
+                            <option value="Pós-graduação">Pós-graduação</option>
+                            <option value="Mestrado">Mestrado</option>
+                            <option value="Doutorado">Doutorado</option>
                         </select>
                     </div>
-                </div>
-            </div>
-            
-            <!-- Seção 2: Formação Acadêmica -->
-            <div class="secao" data-secao="1">
-                <h2>🎓 Formação Acadêmica</h2>
-                <div class="secao-subtitle">Conte-nos sobre sua educação</div>
-                
-                <div class="campo">
-                    <label>Nível de Formação <span class="obrigatorio">*</span></label>
-                    <select name="formacao" required>
-                        <option value="">Selecione...</option>
-                        <option value="Ensino Médio">Ensino Médio Completo</option>
-                        <option value="Ensino Médio">Ensino Médio Profissionalizante completo</option>
-                        <option value="Graduação">Graduação (Cursando)</option>
-                        <option value="Graduação Completa">Graduação Completa</option>
-                        <option value="Pós-graduação">Pós-graduação</option>
-                        <option value="Mestrado">Mestrado</option>
-                        <option value="Doutorado">Doutorado</option>
-                    </select>
-                </div>
-                
-                <div class="campo">
-                    <label>Curso/Área de estudo</label>
-                    <input type="text" name="curso" placeholder="Ex: Ciência da Computação, Administração...">
-                </div>
-                
-                <div class="campo">
-                    <label>Instituição de ensino</label>
-                    <input type="text" name="instituicao" placeholder="Ex: USP, Unicamp, PUC...">
-                </div>
-                
-                <div class="campo">
-                    <label>Ano de conclusão</label>
-                    <input type="number" name="ano_conclusao" min="1950" max="2030" placeholder="Ex: 2024">
+                    
+                    <div class="campo">
+                        <label>Curso/Área de estudo</label>
+                        <input type="text" name="curso" placeholder="Ex: Ciência da Computação, Administração...">
+                    </div>
+                    
+                    <div class="campo">
+                        <label>Instituição de ensino</label>
+                        <input type="text" name="instituicao" placeholder="Ex: USP, Unicamp, PUC...">
+                    </div>
+                    
+                    <div class="campo">
+                        <label>Ano de conclusão</label>
+                        <input type="number" name="ano_conclusao" min="1950" max="2030" placeholder="Ex: 2024">
+                    </div>
                 </div>
             </div>
             
@@ -105,36 +104,37 @@
 
 
             <!-- Seção 3: Experiência Recente -->
-            <div class="secao" data-secao="2">
-                <h2>💼 Experiência Mais Recente</h2>
-                <div class="secao-subtitle">Conte sobre sua última experiência profissional</div>
-                
-                <div class="campo">
-                    <label>Último cargo <span class="obrigatorio">*</span> </label>
-                    <input type="text" name="ultimo_cargo" required placeholder="Ex: sem experiencia, Desenvolvedor Pleno, Analista de Marketing...">
+             <div class="container2">
+                <div class="secao-experiencia" data-secao="2">
+                    <h2>💼 Experiência Mais Recente</h2>
+                    <div class="secao-subtitle">Conte sobre sua última experiência profissional</div>
+                    
+                    <div class="campo">
+                        <label>Último cargo <span class="obrigatorio">*</span> </label>
+                        <input type="text" name="ultimo_cargo" required placeholder="Ex: sem experiencia, Desenvolvedor Pleno, Analista de Marketing...">
+                    </div>
+                    
+                    <div class="campo">
+                        <label>Empresa/empregador <span class="obrigatorio">*</span> </label>
+                        <input type="text" name="ultima_empresa" required placeholder="Ex: sem experiencia, Google, Microsoft, Startup XYZ...">
+                    </div>
+                    
+                    <div class="campo">
+                        <label>Tempo de experiência na área <span class="obrigatorio">*</span></label>
+                        <select name="tempo_experiencia" required>
+                            <option value="">Selecione...</option>
+                            <option value="0-1 ano">Sem experiência</option>
+                            <option value="0-1 ano">Menos de 1 ano</option>
+                            <option value="1-3 anos">1 a 3 anos</option>
+                            <option value="3-5 anos">3 a 5 anos</option>
+                            <option value="5-10 anos">5 a 10 anos</option>
+                            <option value="10+ anos">Mais de 10 anos</option>
+                        </select>
+                    </div>
                 </div>
                 
-                <div class="campo">
-                    <label>Empresa/empregador <span class="obrigatorio">*</span> </label>
-                    <input type="text" name="ultima_empresa" required placeholder="Ex: sem experiencia, Google, Microsoft, Startup XYZ...">
-                </div>
-                
-                <div class="campo">
-                    <label>Tempo de experiência na área <span class="obrigatorio">*</span></label>
-                    <select name="tempo_experiencia" required>
-                        <option value="">Selecione...</option>
-                        <option value="0-1 ano">Sem experiência</option>
-                        <option value="0-1 ano">Menos de 1 ano</option>
-                        <option value="1-3 anos">1 a 3 anos</option>
-                        <option value="3-5 anos">3 a 5 anos</option>
-                        <option value="5-10 anos">5 a 10 anos</option>
-                        <option value="10+ anos">Mais de 10 anos</option>
-                    </select>
-                </div>
-            </div>
-            
-            <!-- Seção 4: Competências -->
-            <div class="secao" data-secao="3">
+                <!-- Seção 4: Competências -->
+                <div class="secao-competencias" data-secao="3">
                 <h2>⚡ Competências</h2>
                 <div class="secao-subtitle">Selecione suas principais habilidades</div>
                 
@@ -154,14 +154,16 @@
                 <small style="color: #666;">Dica: Você pode adicionar quantas competências quiser</small>
             </div>
             
-            <div class="botoes">
-                <button type="button" class="btn-secondary" id="btnAnterior" onclick="mudarSecao(-1)">◀ Anterior</button>
-                <button type="button" class="btn-primary" id="btnProximo" onclick="mudarSecao(1)">Próximo ▶</button>
-            </div>
             
-            <div class="botoes" id="divSubmit" style="display: none;">
-                <button type="submit" class="btn-submit">✅ Finalizar Perfil</button>
+            
+            
+            <div class="container-btn">
+                <div class="btn" id="divSubmit">
+                    <button type="submit" class="btn-submit">✅ Finalizar Perfil</button>
+                </div>
             </div>
+
+            
         </form>
     </div>
     

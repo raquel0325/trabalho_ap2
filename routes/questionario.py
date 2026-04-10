@@ -22,6 +22,12 @@ def questionario_pag(id_func):
 @bp_questionario_comp.route('/salvar_questionario', methods=['POST'])
 def salvar_questionario():
     id_func = request.form.get('id_func')
+
+    if 'usuario_id' not in session or session['usuario_id'] != int(id_func):
+        flash("Sessão expirada. Por favor, faça login novamente!", "erro")
+        return redirect('/')
+
+
     cidade = request.form.get('cidade')
     estado = request.form.get('estado')
     formacao = request.form.get('formacao')
@@ -74,7 +80,8 @@ def salvar_questionario():
 
         conn.commit()
         flash("Questionário salvo com sucesso!", "sucesso")
-        
+        return redirect(url_for('home.home_pag'))
+  
     except sqlite3.Error as e:
         print(f"Erro ao salvar: {e}")
         conn.rollback()

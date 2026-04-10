@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, render_template, request, redirect, url_for
+from flask import Blueprint, flash, render_template, request, redirect, session, url_for
 from database import conectar_banco
 import sqlite3 
 
@@ -26,14 +26,18 @@ def cadastro_funcionario():
         
         id_new_employer = cursor.lastrowid # Pega o ID gerado
         conn.commit()
-        conn.close()
+        
+        # Redireciona para a página de questionário, passando o ID do novo funcionário
+        session['usuario_id'] = id_new_employer
+        session['usuario_nome'] = nome
+        session['tipo'] = 'funcionario'
 
+        conn.close()
 
         return redirect(url_for('questionario.questionario_pag', id_func=id_new_employer))
         
     except sqlite3.IntegrityError:
         conn.close()
-        flash("E-mail ou CNPJ já cadastrado!", "erro")
+        flash("E-mail ou CPF já cadastrado!", "erro")
         return redirect('/')
-    
 
