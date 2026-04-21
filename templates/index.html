@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <title>Cadastro Geral</title>
     <link rel="stylesheet" href="../static/css/index.css">
+    <script src="../static/script/index.js"></script>
 </head>
 <body>
+
+
 
 
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -17,48 +20,82 @@
     </div>
   {% endif %}
 {% endwith %}
-<script>
-    // Seleciona todos os alertas e remove após 4 segundos
-    setTimeout(() => {
-        const alertas = document.querySelectorAll('.alerta');
-        alertas.forEach(a => a.style.display = 'none');
-    }, 4000);
-</script>
+
+            
+
 
 
 
     <div class="conteinerInf">
-        <h1>Bem-vindo!</h1>
+    <div class="conteudo-inf">
+        <img src="../static/imagem/image1.jpg" alt="Logo Vagas Conecta" class="image-inf">
+                <img src="../static/imagem/logo.png" alt="Logo Vagas Conecta" class="logo">
+        <p>Conecte-se à sua próxima grande oportunidade no  Conecta.</p>
+
+
     </div>
+</div>
+   
 
-    <div class="containerAcesso">
+
+
+
+
+<!--============================================================================================-->
+        <!-- containerAcesso-->
+<!--============================================================================================-->
+        <div class="containerAcesso"> 
         
+    <!--=========================================================================================-->
+        <!-- escolhaInicial-->    
+    <!--=========================================================================================-->
         <div id="escolhaInicial" class="btn-main-group">
-            <button class="btn-main" onclick="selecionarFluxo('login')">Fazer Login</button>
-            <button class="btn-main" onclick="selecionarFluxo('cadastro')">Criar Conta</button>
+            <button class="btn-main" onclick="mudar('login')">Fazer Login</button>
+            <button class="btn-main" onclick="mudar('cadastro')">Criar Conta</button>
         </div>
+        <!-- fim do escolhaInicial--> 
 
+
+    <!--============================================================================================-->
+        <!-- secaoLogin inicio-->
+    <!--============================================================================================-->
         <div id="secaoLogin" class="containerLogin">
             <h2>Faça seu login:</h2>
             <form action="/home" method="POST">
                 <input type="email" name="email" placeholder="E-mail" required><br>
                 <input type="password" name="senha" placeholder="Senha" required><br>
-                <button type="submit">Entrar</button>
+                
+                <button type="submit" class="btn-entrar">Entrar</button>
             </form>
-        </div>
+            <div class="opcoes-login"> <!--terminar de  fazer ainda ================================================-->
+                <p class="ou">ou</p>
+                    <button class="btn-google" onclick="window.location.href='/google-login'">G Entrar com Google</button>
+           
 
+                <button class="btn-linkedin">in Entrar com LinkedIn</button>
+   
+                <a href="#" class="esqueci-senha">Esqueci minha senha</a>
+            </div>
+        </div>
+        <!-- secaoLogin fim-->
+
+
+
+        <!-- secaoCadastro inicio-->
         <div id="secaoCadastro" class="conteinerCadastro hidden">
             <h2>Selecione o tipo de cadastro:</h2>
             
             <div class="btn-group">
-                <button class="toggle-btn" onclick="mostrarFormCadastro('formFuncionario')">Funcionário</button>
-                <button class="toggle-btn" onclick="mostrarFormCadastro('formEmpresa')">Empresa</button>
+                <button class="toggle-btn" onclick="formCad('formFuncionario')">Funcionário</button>
+                
+                <button class="toggle-btn" onclick="formCad('formEmpresa')">Empresa</button>
+                
             </div>
 
-            <hr>
+            
 
             <div id="formFuncionario" class="form-container active"> 
-                <h3>Cadastro de Funcionário</h3>
+                
                 <form action="/cadastro" method="POST">
                     <input type="text" name="nome" placeholder="Nome" required><br>
                     <input type="email" name="email" placeholder="E-mail" required><br>
@@ -66,12 +103,12 @@
                     <input type="text" name="cpf" placeholder="CPF" required><br>
                     <input type="tel" name="telefone" placeholder="Telefone"><br>
 
-                    <button type="submit">Add Funcionário</button>
+                    <button type="submit" class="btn-entrar">Cadastrar</button>
                 </form>
             </div>
 
             <div id="formEmpresa" class="form-container">
-                <h3>Cadastro de Empresa</h3>
+                
                 <form action="/cadastros"  method="POST">
                     <input type="text" name="nome" placeholder="Nome da Empresa" required><br>
                     <input type="text" name="cnpj" placeholder="CNPJ" required><br>
@@ -79,32 +116,15 @@
                     <input type="email" name="email" placeholder="E-mail Corporativo"><br>
                     <input type="password" name="senha" placeholder="Senha" required><br>
                     <input type="tel" name="telefone" placeholder="Telefone"><br>
-                    <button type="submit">Add Empresa</button>
+                    <button type="submit" class="btn-entrar">Cadastrar</button>
                 </form>
             </div>
-        </div>
-    </div>
+        </div> <!--secao cadastro fim-->
 
-    <script>
-        function selecionarFluxo(tipo) {
-           
-            if (tipo === 'login') {
-                document.getElementById('secaoLogin').classList.remove('hidden');
-                document.getElementById('secaoCadastro').classList.add('hidden');
-            } else {
-                document.getElementById('secaoLogin').classList.add('hidden');
-                document.getElementById('secaoCadastro').classList.remove('hidden');
-            }
-        }
+    </div><!-- fim do containerAcesso-->
 
-        function mostrarFormCadastro(idForm) {
-           
-            document.querySelectorAll('.form-container').forEach(div => {
-                div.classList.remove('active');
-            });
-          
-            document.getElementById(idForm).classList.add('active');
-        }
-    </script>
+
+
+   
 </body>
 </html>

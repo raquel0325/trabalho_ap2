@@ -15,7 +15,7 @@ def questionario_pag(id_func):
     comps = cursor.fetchall()
     conn.close()
     return render_template('questionario.html', id_func=id_func, competencias=comps)
-    
+
 
 
 

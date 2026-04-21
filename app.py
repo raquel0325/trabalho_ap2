@@ -26,5 +26,11 @@ app.register_blueprint(bp_questionario_comp)
 from routes.home import bp_home 
 app.register_blueprint(bp_home)
 
+# Importar e inicializar o OAuth para Google
+from routes.logincomgoogle import bp_google, init_oauth
+init_oauth(app)
+app.register_blueprint(bp_google)
+
+
 if __name__ == '__main__':
     app.run(debug=True)

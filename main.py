@@ -1,6 +1,6 @@
 import sqlite3
 import os
-
+from dotenv import load_dotenv
 
 conexao = sqlite3.connect('banco.db')
 
@@ -109,6 +109,5 @@ create_questionario = '''CREATE TABLE IF NOT EXISTS respostas_questionario (
 
 cursor.execute(create_questionario)
  
-
 conexao.commit() 
 conexao.close()

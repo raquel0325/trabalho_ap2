@@ -18,6 +18,13 @@ def home_pag():
         return render_template('home_func.html', nome=nome, tipo=tipo)
     elif tipo == 'empresa':
         return render_template('home_emp.html', nome=nome, tipo=tipo)
+    elif tipo == 'google':
+        google_user = session.get('user', {})
+        return render_template('home_func.html',
+                               nome= google_user.get('nome', 'usuário google'),
+                               tipo='google',
+                               user= google_user)
+                               
     else:
         return redirect('/')
 
